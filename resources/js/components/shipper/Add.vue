@@ -11,7 +11,8 @@
                             <div class="col-12 mb-2">
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" v-model="shipper.name">
+                                    <input type="text" class="form-control" v-model="shipper.name" v-bind:class="{ 'is-invalid': errors.name }">
+                                    <div class="invalid-feedback" v-if="errors.name">{{ errors.name[0] }}</div>
                                 </div>
                             </div>
                         </div>
@@ -19,7 +20,8 @@
                             <div class="col-12 mb-2">
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" class="form-control" v-model="shipper.address">
+                                    <input type="text" class="form-control" v-model="shipper.address" v-bind:class="{ 'is-invalid': errors.address }">
+                                    <div class="invalid-feedback" v-if="errors.address">{{ errors.address[0] }}</div>
                                 </div>
                             </div>
                         </div>
@@ -27,13 +29,15 @@
                             <div class="col-6 mb-2">
                                 <div class="form-group">
                                     <label>Primary contact Name</label>
-                                    <input type="text" class="form-control" v-model="shipper.cname">
+                                    <input type="text" class="form-control" v-model="shipper.cname" v-bind:class="{ 'is-invalid': errors.cname }">
+                                    <div class="invalid-feedback" v-if="errors.cname">{{ errors.cname[0] }}</div>
                                 </div>
                             </div>
                             <div class="col-6 mb-2">
                                 <div class="form-group">
                                     <label>Primary contact number</label>
-                                    <input type="number" class="form-control" v-model="shipper.cnumber">
+                                    <input type="number" class="form-control" v-model="shipper.cnumber" v-bind:class="{ 'is-invalid': errors.cname }">
+                                    <div class="invalid-feedback" v-if="errors.cnumber">{{ errors.cnumber[0] }}</div>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +87,8 @@ export default {
             contacts: [{
                 cname: '',
                 cnumber: '',
-            }]
+            }],
+            errors: {},
         }
     },
     methods:{
@@ -92,7 +97,7 @@ export default {
             await this.axios.post('/api/shipper',data).then(response=>{
                 this.$router.push({name:"shipperList"})
             }).catch(error=>{
-                console.log(error)
+                this.errors = error.response.data.errors
             })
         },
         addNewRow() {

@@ -6,6 +6,7 @@ use App\Models\Shipper;
 use App\Models\Contacts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Validator;
 
 class ShipperController extends Controller
 {
@@ -34,8 +35,16 @@ class ShipperController extends Controller
      */
     public function store(Request $request)
     {
-        //shipper array
+
         $shipper_details = $request->shipper;
+
+        $validator = Validator::make($shipper_details, [
+            'name' => 'required|max:255',
+            'address' => 'required',
+            'cname' => 'required|max:255',
+            'cnumber' => 'required|numeric|digits:10',
+        ])->validate();
+
 
         //Shipepr data
         $shipper_data = array_slice($shipper_details, 0,2);

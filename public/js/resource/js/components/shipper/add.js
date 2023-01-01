@@ -28,7 +28,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       contacts: [{
         cname: '',
         cnumber: ''
-      }]
+      }],
+      errors: {}
     };
   },
   methods: {
@@ -49,7 +50,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   name: "shipperList"
                 });
               })["catch"](function (error) {
-                console.log(error);
+                _this.errors = error.response.data.errors;
               });
             case 3:
             case "end":
@@ -112,6 +113,9 @@ var render = function render() {
       expression: "shipper.name"
     }],
     staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.errors.name
+    },
     attrs: {
       type: "text"
     },
@@ -124,7 +128,9 @@ var render = function render() {
         _vm.$set(_vm.shipper, "name", $event.target.value);
       }
     }
-  })])])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm.errors.name ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.errors.name[0]))]) : _vm._e()])])]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-12 mb-2"
@@ -138,6 +144,9 @@ var render = function render() {
       expression: "shipper.address"
     }],
     staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.errors.address
+    },
     attrs: {
       type: "text"
     },
@@ -150,7 +159,9 @@ var render = function render() {
         _vm.$set(_vm.shipper, "address", $event.target.value);
       }
     }
-  })])])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm.errors.address ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.errors.address[0]))]) : _vm._e()])])]), _vm._v(" "), _c("div", {
     staticClass: "row"
   }, [_c("div", {
     staticClass: "col-6 mb-2"
@@ -164,6 +175,9 @@ var render = function render() {
       expression: "shipper.cname"
     }],
     staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.errors.cname
+    },
     attrs: {
       type: "text"
     },
@@ -176,7 +190,9 @@ var render = function render() {
         _vm.$set(_vm.shipper, "cname", $event.target.value);
       }
     }
-  })])]), _vm._v(" "), _c("div", {
+  }), _vm._v(" "), _vm.errors.cname ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.errors.cname[0]))]) : _vm._e()])]), _vm._v(" "), _c("div", {
     staticClass: "col-6 mb-2"
   }, [_c("div", {
     staticClass: "form-group"
@@ -188,6 +204,9 @@ var render = function render() {
       expression: "shipper.cnumber"
     }],
     staticClass: "form-control",
+    "class": {
+      "is-invalid": _vm.errors.cname
+    },
     attrs: {
       type: "number"
     },
@@ -200,7 +219,9 @@ var render = function render() {
         _vm.$set(_vm.shipper, "cnumber", $event.target.value);
       }
     }
-  })])])]), _vm._v(" "), _vm._l(_vm.contacts, function (contact, c) {
+  }), _vm._v(" "), _vm.errors.cnumber ? _c("div", {
+    staticClass: "invalid-feedback"
+  }, [_vm._v(_vm._s(_vm.errors.cnumber[0]))]) : _vm._e()])])]), _vm._v(" "), _vm._l(_vm.contacts, function (contact, c) {
     return _c("div", {
       key: c,
       staticClass: "row"

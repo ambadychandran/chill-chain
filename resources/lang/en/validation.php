@@ -147,6 +147,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => 'shipper name',
+        'address' => 'shipper address',
+        'address' => 'shipper address',
+        'cname' => 'primary contact name',
+        'cnumber' => 'primary contact number',
+    ],
 
 ];
